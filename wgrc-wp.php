@@ -255,11 +255,11 @@ function handle_shortcode() {
 
     $display .= display_selections($table);
 
-    if ($table == 'genetic_stocks') {
-      $display .= "Table: <b>Genetic Stocks</b><br><br>";
-    } elseif ($table = 'germplasm') {
-      $display .= "Table: <b>Germplasm</b><br><br>";
-    }
+    // if ($table == 'genetic_stocks') {
+    //   $display .= "Table: <b>Genetic Stocks</b><br><br>";
+    // } elseif ($table = 'germplasm') {
+    //   $display .= "Table: <b>Germplasm</b><br><br>";
+    // }
 
     $data = get_data($table);
     $display .= display_data($data, $table);
