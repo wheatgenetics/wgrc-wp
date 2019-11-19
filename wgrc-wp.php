@@ -19,6 +19,12 @@ function get_data($table) {
 
 function display_selections($table = '') {
   $selections = '
+  <style>
+  form {
+    padding-bottom: 20px;
+  }
+  </style>
+
   <form method="post" action="">
     <label for="table-select">Choose a table:</label><br>
 
