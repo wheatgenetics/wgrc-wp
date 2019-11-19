@@ -74,14 +74,14 @@ function display_data($data, $table) {
     $results .= '
     <style>
     .grid {
-      grid-template-columns: repeat(32, 1fr);
+      grid-template-columns: repeat(16, 1fr);
     }
     </style>
     ';
 
     $results .= '
     <div class="grid">
-      <span class="gray-header">TA_Key</span>
+      <!-- <span class="gray-header">TA_Key</span> -->
       <span class="gray-header">TA_number</span>
       <span class="gray-header">line_number</span>
       <span class="gray-header">subline_number</span>
@@ -92,31 +92,31 @@ function display_data($data, $table) {
       <span class="gray-header">chromosome_of_interest</span>
       <span class="gray-header">donor_species_cultivar</span>
       <span class="gray-header">constitution</span>
-      <span class="gray-header">source</span>
-      <span class="gray-header">source_id</span>
-      <span class="gray-header">source_seed</span>
-      <span class="gray-header">pi_number</span>
-      <span class="gray-header">alias</span>
-      <span class="gray-header">two_n_equals</span>
+      <!-- <span class="gray-header">source</span> -->
+      <!-- <span class="gray-header">source_id</span> -->
+      <!-- <span class="gray-header">source_seed</span> -->
+      <!-- <span class="gray-header">pi_number</span> -->
+      <!-- <span class="gray-header">alias</span> -->
+      <span class="gray-header">2n=</span>
       <span class="gray-header">genes</span>
       <span class="gray-header">chromosome_location</span>
       <span class="gray-header">phenotypic_traits</span>
       <span class="gray-header">notes</span>
-      <span class="gray-header">caution</span>
-      <span class="gray-header">GBS</span>
-      <span class="gray-header">banding</span>
-      <span class="gray-header">count</span>
+      <!-- <span class="gray-header">caution</span> -->
+      <!-- <span class="gray-header">GBS</span> -->
+      <!-- <span class="gray-header">banding</span> -->
+      <!-- <span class="gray-header">count</span> -->
       <span class="gray-header">pedigree</span>
-      <span class="gray-header">last_seed_increase</span>
-      <span class="gray-header">other_si</span>
-      <span class="gray-header">germ_check</span>
-      <span class="gray-header">reference</span>
-      <span class="gray-header">acquisition_date</span>
-      <span class="gray-header">available</span>
+      <!-- <span class="gray-header">last_seed_increase</span> -->
+      <!-- <span class="gray-header">other_si</span> -->
+      <!-- <span class="gray-header">germ_check</span> -->
+      <!-- <span class="gray-header">reference</span> -->
+      <!-- <span class="gray-header">acquisition_date</span> -->
+      <!-- <span class="gray-header">available</span> -->
     ';
 
     foreach ($data as $obj) :
-      $results .= "<span class='data-cell'>" . $obj->TA_Key . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->TA_Key . "</span>";
       $results .= "<span class='data-cell'>" . $obj->TA_number . "</span>";
       $results .= "<span class='data-cell'>" . $obj->line_number . "</span>";
       $results .= "<span class='data-cell'>" . $obj->subline_number . "</span>";
@@ -127,27 +127,27 @@ function display_data($data, $table) {
       $results .= "<span class='data-cell'>" . $obj->chromosome_of_interest . "</span>";
       $results .= "<span class='data-cell'>" . $obj->donor_species_cultivar . "</span>";
       $results .= "<span class='data-cell'>" . $obj->constitution . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->source . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->source_id . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->source_seed . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->pi_number . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->alias . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->source . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->source_id . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->source_seed . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->pi_number . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->alias . "</span>";
       $results .= "<span class='data-cell'>" . $obj->two_n_equals . "</span>";
       $results .= "<span class='data-cell'>" . $obj->genes . "</span>";
       $results .= "<span class='data-cell'>" . $obj->chromosome_location . "</span>";
       $results .= "<span class='data-cell'>" . $obj->phenotypic_traits . "</span>";
       $results .= "<span class='data-cell'>" . $obj->notes . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->caution . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->GBS . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->banding . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->count . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->caution . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->GBS . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->banding . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->count . "</span>";
       $results .= "<span class='data-cell'>" . $obj->pedigree . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->last_seed_increase . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->other_si . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->germ_check . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->reference . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->acquisition_date . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->available . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->last_seed_increase . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->other_si . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->germ_check . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->reference . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->acquisition_date . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->available . "</span>";
     endforeach;
   } elseif ($table == 'germplasm') {
     $results .= '
