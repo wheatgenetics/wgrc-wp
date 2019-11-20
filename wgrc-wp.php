@@ -17,29 +17,83 @@ function get_data($table) {
   return $results;
 }
 
-function display_form($table = '') {
-  $selections = '
+function remove_duplicate_objects_by_property($data, $property) {
+  $properties = array_map(function($obj) {
+    return $obj->{$property};
+  }, $data);
+  
+  $unique_properties = array_unique($properties);
+  
+  return array_values(array_intersect_key($data, $unique_properties));
+}
+
+function display_form($data, $table = '') {
+  $form = '
   <style>
   form {
-    padding-bottom: 20px;
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
   }
   </style>
 
   <form method="post" action="">
-    <label for="table-select">Choose a table:</label><br>
+    <label for="table-select">Table:<br>
+      <select name="table" id="table-select">
+        <option value="">--Please choose a table--</option>
+        <option value="genetic_stocks"' . ($table=="genetic_stocks" ? "selected" : "") . '>Genetic Stocks</option>
+        <option value="germplasm"' . ($table=="germplasm" ? "selected" : "") . '>Germplasm</option>
+      </select>
+    </label>
 
-    <select name="table" id="table-select">
-      <option value="">--Please choose an option--</option>
-      <option value="genetic_stocks"' . ($table=="genetic_stocks" ? "selected" : "") . '>Genetic Stocks</option>
-      <option value="germplasm"' . ($table=="germplasm" ? "selected" : "") . '>Germplasm</option>
-    </select>
+    <label for="type-select">Type:<br>
+      <select name="type" id="type-select">
+        <option value="">--Please choose a type--</option>
+    ';
+
+    $unique_data = remove_duplicate_objects_by_property($data, 'stock_type');
+    foreach ($unique_data as $obj) {
+      $form .= '<option value="' . $obj->stock_type . '">' . $obj->stock_type . '</option>';
+    }
+    
+    $form .= '
+      </select>
+    </label>
+
+    <label for="gene-select">Gene:<br>
+      <select name="gene" id="gene-select">
+        <option value="">--Please choose a gene--</option>
+        ';
+    
+        $unique_data = remove_duplicate_objects_by_property($data, 'genes');
+
+        foreach ($unique_data as $obj) {
+          $form .= '<option value="' . $obj->genes . '">' . $obj->genes . '</option>';
+        }
+        
+        $form .= '
+      </select>
+    </label>
+
+    <label for="chromosome-select">Chromosome:<br>
+      <select name="chromosome" id="chromosome-select">
+        <option value="">--Please choose a chromosome--</option>
+        ';
+    
+        foreach ($data as $obj) {
+          $form .= '<option value="' . $obj->chromosome_of_interest . '">' . $obj->chromosome_of_interest . '</option>';
+        }
+        
+        $form .= '
+      </select>
+    </label>
 
     <input type="submit" name="submit" value="Submit">
   </form> 
   <br>
   ';
 
-  return $selections;
+  return $form;
 }
 
 function display_data($data, $table) {
@@ -121,7 +175,7 @@ function display_data($data, $table) {
       <!-- <span class="gray-header">available</span> -->
     ';
 
-    foreach ($data as $obj) :
+    foreach ($data as $obj) {
       // $results .= "<span class='data-cell'>" . $obj->TA_Key . "</span>";
       $results .= "<span class='data-cell'>" . $obj->TA_number . "</span>";
       $results .= "<span class='data-cell'>" . $obj->line_number . "</span>";
@@ -154,7 +208,7 @@ function display_data($data, $table) {
       // $results .= "<span class='data-cell'>" . $obj->reference . "</span>";
       // $results .= "<span class='data-cell'>" . $obj->acquisition_date . "</span>";
       // $results .= "<span class='data-cell'>" . $obj->available . "</span>";
-    endforeach;
+    }
   } elseif ($table == 'germplasm') {
     $results .= '
     <style>
@@ -203,7 +257,7 @@ function display_data($data, $table) {
       <span class="gray-header">Available</span>
     ';
 
-    foreach ($data as $obj) :
+    foreach ($data as $obj) {
       // $results .= "<span class='data-cell'>" . $obj->TA_Key . "</span>";
       $results .= "<span class='data-cell'>" . $obj->TA_number . "</span>";
       $results .= "<span class='data-cell'>" . $obj->line_number . "</span>";
@@ -239,7 +293,7 @@ function display_data($data, $table) {
       // $results .= "<span class='data-cell'>" . $obj->OTHER_SI . "</span>";
       $results .= "<span class='data-cell'>" . $obj->CORE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->Available . "</span>";
-    endforeach;
+    }
   }
   
   $results .= "</div>";
@@ -252,9 +306,6 @@ function handle_shortcode() {
 
   if (isset($_POST['submit'])) {
     $table = $_POST['table'];
-
-    $display .= display_form($table);
-
     // if ($table == 'genetic_stocks') {
     //   $display .= "Table: <b>Genetic Stocks</b><br><br>";
     // } elseif ($table = 'germplasm') {
@@ -262,9 +313,11 @@ function handle_shortcode() {
     // }
 
     $data = get_data($table);
+    $display .= display_form($data, $table);
+
     $display .= display_data($data, $table);
   } else {
-    $display .= display_form();
+    $display .= display_form(NULL, '');
   }
 
   return $display;
