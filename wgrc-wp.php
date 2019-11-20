@@ -17,7 +17,7 @@ function get_data($table) {
   return $results;
 }
 
-function display_selections($table = '') {
+function display_form($table = '') {
   $selections = '
   <style>
   form {
@@ -253,7 +253,7 @@ function handle_shortcode() {
   if (isset($_POST['submit'])) {
     $table = $_POST['table'];
 
-    $display .= display_selections($table);
+    $display .= display_form($table);
 
     // if ($table == 'genetic_stocks') {
     //   $display .= "Table: <b>Genetic Stocks</b><br><br>";
@@ -264,7 +264,7 @@ function handle_shortcode() {
     $data = get_data($table);
     $display .= display_data($data, $table);
   } else {
-    $display .= display_selections();
+    $display .= display_form();
   }
 
   return $display;
