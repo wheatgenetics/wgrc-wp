@@ -88,9 +88,9 @@ function display_data($data, $table) {
     $results .= '
     <div class="grid">
       <!-- <span class="gray-header">TA_Key</span> -->
-      <span class="gray-header">TA #</span>
-      <span class="gray-header">Line</span>
-      <span class="gray-header">Subline</span>
+      <span class="gray-header">TA Number</span>
+      <span class="gray-header">Line Number</span>
+      <span class="gray-header">Subline Number</span>
       <span class="gray-header">Type</span>
       <span class="gray-header">Cultivar or Name</span>
       <span class="gray-header">Abbreviation</span>
@@ -159,56 +159,56 @@ function display_data($data, $table) {
     $results .= '
     <style>
     .grid {
-      grid-template-columns: repeat(35, 1fr);
+      grid-template-columns: repeat(25, 1fr);
     }
     </style>
     ';
 
     $results .= '
     <div class="grid">
-      <span class="gray-header">TA_Key</span>
-      <span class="gray-header">TA_number</span>
-      <span class="gray-header">line_number</span>
-      <span class="gray-header">PUID</span>
-      <span class="gray-header">INSTCODE</span>
-      <span class="gray-header">ACCENUMB</span>
-      <span class="gray-header">COLLNUMB</span>
-      <span class="gray-header">COLLCODE</span>
+      <!-- <span class="gray-header">TA Key</span> -->
+      <span class="gray-header">TA Number</span>
+      <span class="gray-header">Line Number</span>
+      <!-- <span class="gray-header">PUID</span> -->
+      <!-- <span class="gray-header">INSTCODE</span> -->
+      <span class="gray-header">ACCESS NUMBER</span>
+      <span class="gray-header">COLLECTION NUMBER</span>
+      <span class="gray-header">COLLECTION CODE</span>
       <span class="gray-header">GENUS</span>
       <span class="gray-header">SPECIES</span>
-      <span class="gray-header">SPAUTHOR</span>
+      <span class="gray-header">SPECIES AUTHOR</span>
       <span class="gray-header">SUBTAXA</span>
       <span class="gray-header">VARIETY</span>
-      <span class="gray-header">SUBTAUTHOR</span>
-      <span class="gray-header">ACCENAME</span>
-      <span class="gray-header">ACQDATE</span>
-      <span class="gray-header">ORIGCTY</span>
-      <span class="gray-header">COLLSITE</span>
-      <span class="gray-header">DECLATITUDE</span>
-      <span class="gray-header">DECLONGITUDE</span>
+      <span class="gray-header">SUBTAXA AUTHOR</span>
+      <span class="gray-header">ACCESS NAME</span>
+      <!-- <span class="gray-header">ACQUISITION DATE</span> -->
+      <span class="gray-header">ORIGINAL COUNTRY</span>
+      <span class="gray-header">COLLECTION SITE</span>
+      <span class="gray-header">DECLINATION LATITUDE</span>
+      <span class="gray-header">DECLINATION LONGITUDE</span>
       <span class="gray-header">ELEVATION</span>
-      <span class="gray-header">GEOREFMETH</span>
-      <span class="gray-header">COLLDATE</span>
-      <span class="gray-header">SAMPSTAT</span>
-      <span class="gray-header">COLLSRC</span>
-      <span class="gray-header">DONORCODE</span>
-      <span class="gray-header">DONORNAME</span>
-      <span class="gray-header">DONORNUMB</span>
-      <span class="gray-header">OTHERNUMB</span>
-      <span class="gray-header">STORAGE</span>
+      <!-- <span class="gray-header">GEOREFMETH</span> -->
+      <span class="gray-header">COLLECTION DATE</span>
+      <!-- <span class="gray-header">SAMPSTAT</span> -->
+      <!-- <span class="gray-header">COLLECTION SOURCE</span> -->
+      <span class="gray-header">DONOR CODE</span>
+      <span class="gray-header">DONOR NAME</span>
+      <span class="gray-header">DONOR NUMBER</span>
+      <span class="gray-header">OTHER NUMBER</span>
+      <!-- <span class="gray-header">STORAGE</span> -->
       <span class="gray-header">REMARKS</span>
-      <span class="gray-header">LAST_SEED_INCREASE</span>
-      <span class="gray-header">OTHER_SI</span>
+      <!-- <span class="gray-header">LAST_SEED_INCREASE</span> -->
+      <!-- <span class="gray-header">OTHER_SI</span> -->
       <span class="gray-header">CORE</span>
       <span class="gray-header">Available</span>
     ';
 
     foreach ($data as $obj) :
-      $results .= "<span class='data-cell'>" . $obj->TA_Key . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->TA_Key . "</span>";
       $results .= "<span class='data-cell'>" . $obj->TA_number . "</span>";
       $results .= "<span class='data-cell'>" . $obj->line_number . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->PUID . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->INSTCODE . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->PUID . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->INSTCODE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->ACCENUMB . "</span>";
       $results .= "<span class='data-cell'>" . $obj->COLLNUMB . "</span>";
       $results .= "<span class='data-cell'>" . $obj->COLLCODE . "</span>";
@@ -219,24 +219,24 @@ function display_data($data, $table) {
       $results .= "<span class='data-cell'>" . $obj->VARIETY . "</span>";
       $results .= "<span class='data-cell'>" . $obj->SUBTAUTHOR . "</span>";
       $results .= "<span class='data-cell'>" . $obj->ACCENAME . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->ACQDATE . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->ACQDATE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->ORIGCTY . "</span>";
       $results .= "<span class='data-cell'>" . $obj->COLLSITE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->DECLATITUDE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->DECLONGITUDE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->ELEVATION . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->GEOREFMETH . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->GEOREFMETH . "</span>";
       $results .= "<span class='data-cell'>" . $obj->COLLDATE . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->SAMPSTAT . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->COLLSRC . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->SAMPSTAT . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->COLLSRC . "</span>";
       $results .= "<span class='data-cell'>" . $obj->DONORCODE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->DONORNAME . "</span>";
       $results .= "<span class='data-cell'>" . $obj->DONORNUMB . "</span>";
       $results .= "<span class='data-cell'>" . $obj->OTHERNUMB . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->STORAGE . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->STORAGE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->REMARKS . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->LAST_SEED_INCREASE . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->OTHER_SI . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->LAST_SEED_INCREASE . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->OTHER_SI . "</span>";
       $results .= "<span class='data-cell'>" . $obj->CORE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->Available . "</span>";
     endforeach;
