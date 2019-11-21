@@ -30,16 +30,6 @@ function get_data($table) {
   return $results;
 }
 
-function remove_duplicate_objects_by_property($data, $property) {
-  $properties = array_map(function($obj) {
-    return $obj->{$property};
-  }, $data);
-  
-  $unique_properties = array_unique($properties);
-  
-  return array_values(array_intersect_key($data, $unique_properties));
-}
-
 function display_form($data, $table = '') {
   $form = '
   <form method="post" action="">
@@ -56,9 +46,9 @@ function display_form($data, $table = '') {
         <option value="">--Please choose a type--</option>
     ';
 
-    $unique_data = remove_duplicate_objects_by_property($data, 'stock_type');
-    foreach ($unique_data as $obj) {
-      $form .= '<option value="' . $obj->stock_type . '">' . $obj->stock_type . '</option>';
+    $stock_types = array_unique(array_filter(array_column($data, 'stock_type')));
+    foreach ($stock_types as $stock_type) {
+      $form .= '<option value="' . $stock_type . '">' . $stock_type . '</option>';
     }
     
     $form .= '
@@ -70,10 +60,9 @@ function display_form($data, $table = '') {
         <option value="">--Please choose a gene--</option>
         ';
     
-        $unique_data = remove_duplicate_objects_by_property($data, 'genes');
-
-        foreach ($unique_data as $obj) {
-          $form .= '<option value="' . $obj->genes . '">' . $obj->genes . '</option>';
+        $genes = array_unique(array_filter(array_column($data, 'genes')));
+        foreach ($genes as $gene) {
+          $form .= '<option value="' . $gene . '">' . $gene . '</option>';
         }
         
         $form .= '
@@ -85,8 +74,9 @@ function display_form($data, $table = '') {
         <option value="">--Please choose a chromosome--</option>
         ';
     
-        foreach ($data as $obj) {
-          $form .= '<option value="' . $obj->chromosome_of_interest . '">' . $obj->chromosome_of_interest . '</option>';
+        $chromosomes_of_interest = array_unique(array_filter(array_column($data, 'chromosome_of_interest')));
+        foreach ($chromosomes_of_interest as $chromosome_of_interest) {
+          $form .= '<option value="' . $chromosome_of_interest . '">' . $chromosome_of_interest . '</option>';
         }
         
         $form .= '
