@@ -10,11 +10,18 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
-function wgrc_styles_scripts() {
-    wp_register_style('wgrc_style', plugins_url('/css/style.css', __FILE__), false, '1.0.0', 'all'));
-    // wp_enqueue_script('/js/custom-jquery.js', __FILE__), array('jquery'), '2.5.1');
+function register_scripts() {
+  wp_register_style('wgrc-style', plugins_url('/css/style.css', __FILE__), false, '1.0.0', 'all');
+  // wp_register_script( 'custom_jquery', plugins_url('/js/custom-jquery.js', __FILE__), array('jquery'), '2.5.1' );
 }
-add_action('wp_enqueue_scripts', 'wgrc_styles_scripts');
+add_action('init', 'register_scripts');
+
+function wgrc_scripts(){
+  wp_enqueue_style('wgrc-style');
+  	// wp_enqueue_script('custom_jquery');
+
+}
+add_action('wp_enqueue_scripts', 'wgrc_scripts');
 
 function get_data($table) {
   global $wpdb;
@@ -35,14 +42,6 @@ function remove_duplicate_objects_by_property($data, $property) {
 
 function display_form($data, $table = '') {
   $form = '
-  <style>
-  form {
-    padding: 20px 0;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-  }
-  </style>
-
   <form method="post" action="">
     <label for="table-select">Table:<br>
       <select name="table" id="table-select">
@@ -103,39 +102,6 @@ function display_form($data, $table = '') {
 }
 
 function display_data($data, $table) {
-  $results = '
-  <style>
-  .grid {
-    display: grid;
-    // border-top: 1px solid black;
-    // border-right: 1px solid black;
-  }
-
-  .grid > span {
-    padding: 8px 4px;
-    // border-left: 1px solid black;
-    // border-bottom: 1px solid black;    
-  }
-
-  .grid > span.gray-header {
-    color: #fff;
-    font-size: 12px;
-    line-height: 1.4;
-    text-transform: uppercase;
-    background-color: #333333; 
-    padding: 20px 24px;
-  }
-
-  .grid > span.data-cell {
-    font-size: 14px;
-    color: #808080;
-    line-height: 1.4;
-    padding: 14px 24px;
-    border-bottom: 1px solid #e5e5e5;
-  }
-  </style>
-  ';
-
   if ($table == 'genetic_stocks') {
     $results .= '
     <style>
