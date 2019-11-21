@@ -175,7 +175,7 @@ function display_data($data, $table) {
     $results .= '
     <style>
     .grid {
-      grid-template-columns: repeat(25, 1fr);
+      grid-template-columns: repeat(21, 1fr);
     }
     </style>
     ';
@@ -187,16 +187,16 @@ function display_data($data, $table) {
       <span class="gray-header">Line Number</span>
       <!-- <span class="gray-header">PUID</span> -->
       <!-- <span class="gray-header">INSTCODE</span> -->
-      <span class="gray-header">ACCESS NUMBER</span>
+      <!-- <span class="gray-header">ACCESS NUMBER</span> -->
       <span class="gray-header">COLLECTION NUMBER</span>
       <span class="gray-header">COLLECTION CODE</span>
       <span class="gray-header">GENUS</span>
       <span class="gray-header">SPECIES</span>
-      <span class="gray-header">SPECIES AUTHOR</span>
+      <!-- <span class="gray-header">SPECIES AUTHOR</span> -->
       <span class="gray-header">SUBTAXA</span>
       <span class="gray-header">VARIETY</span>
-      <span class="gray-header">SUBTAXA AUTHOR</span>
-      <span class="gray-header">ACCESS NAME</span>
+      <!-- <span class="gray-header">SUBTAXA AUTHOR</span> -->
+      <!-- <span class="gray-header">ACCESS NAME</span> -->
       <!-- <span class="gray-header">ACQUISITION DATE</span> -->
       <span class="gray-header">ORIGINAL COUNTRY</span>
       <span class="gray-header">COLLECTION SITE</span>
@@ -225,16 +225,16 @@ function display_data($data, $table) {
       $results .= "<span class='data-cell'>" . $obj->line_number . "</span>";
       // $results .= "<span class='data-cell'>" . $obj->PUID . "</span>";
       // $results .= "<span class='data-cell'>" . $obj->INSTCODE . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->ACCENUMB . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->ACCENUMB . "</span>";
       $results .= "<span class='data-cell'>" . $obj->COLLNUMB . "</span>";
       $results .= "<span class='data-cell'>" . $obj->COLLCODE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->GENUS . "</span>";
       $results .= "<span class='data-cell'>" . $obj->SPECIES . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->SPAUTHOR . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->SPAUTHOR . "</span>";
       $results .= "<span class='data-cell'>" . $obj->SUBTAXA . "</span>";
       $results .= "<span class='data-cell'>" . $obj->VARIETY . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->SUBTAUTHOR . "</span>";
-      $results .= "<span class='data-cell'>" . $obj->ACCENAME . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->SUBTAUTHOR . "</span>";
+      // $results .= "<span class='data-cell'>" . $obj->ACCENAME . "</span>";
       // $results .= "<span class='data-cell'>" . $obj->ACQDATE . "</span>";
       $results .= "<span class='data-cell'>" . $obj->ORIGCTY . "</span>";
       $results .= "<span class='data-cell'>" . $obj->COLLSITE . "</span>";
