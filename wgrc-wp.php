@@ -10,6 +10,12 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
+function wgrc_styles_scripts() {
+    wp_register_style('wgrc_style', plugins_url('/css/style.css', __FILE__), false, '1.0.0', 'all'));
+    // wp_enqueue_script('/js/custom-jquery.js', __FILE__), array('jquery'), '2.5.1');
+}
+add_action('wp_enqueue_scripts', 'wgrc_styles_scripts');
+
 function get_data($table) {
   global $wpdb;
   $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$table} LIMIT 100", OBJECT );
