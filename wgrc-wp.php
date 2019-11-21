@@ -40,49 +40,55 @@ function display_form($data, $table = '') {
         <option value="germplasm"' . ($table=="germplasm" ? "selected" : "") . '>Germplasm</option>
       </select>
     </label>
-
-    <label for="type-select">Type:<br>
-      <select name="type" id="type-select">
-        <option value="">--Please choose a type--</option>
     ';
 
-    $stock_types = array_unique(array_filter(array_column($data, 'stock_type')));
-    foreach ($stock_types as $stock_type) {
-      $form .= '<option value="' . $stock_type . '">' . $stock_type . '</option>';
+    if ($data) {
+      $form .= '
+      <label for="type-select">Type:<br>
+        <select name="type" id="type-select">
+          <option value="">--Please choose a type--</option>
+      ';
+
+      $stock_types = array_unique(array_filter(array_column($data, 'stock_type')));
+      foreach ($stock_types as $stock_type) {
+        $form .= '<option value="' . $stock_type . '">' . $stock_type . '</option>';
+      }
+      
+      $form .= '
+        </select>
+      </label>
+
+      <label for="gene-select">Gene:<br>
+        <select name="gene" id="gene-select">
+          <option value="">--Please choose a gene--</option>
+          ';
+      
+          $genes = array_unique(array_filter(array_column($data, 'genes')));
+          foreach ($genes as $gene) {
+            $form .= '<option value="' . $gene . '">' . $gene . '</option>';
+          }
+          
+          $form .= '
+        </select>
+      </label>
+
+      <label for="chromosome-select">Chromosome:<br>
+        <select name="chromosome" id="chromosome-select">
+          <option value="">--Please choose a chromosome--</option>
+          ';
+      
+          $chromosomes_of_interest = array_unique(array_filter(array_column($data, 'chromosome_of_interest')));
+          foreach ($chromosomes_of_interest as $chromosome_of_interest) {
+            $form .= '<option value="' . $chromosome_of_interest . '">' . $chromosome_of_interest . '</option>';
+          }
+          
+          $form .= '
+        </select>
+      </label>
+      ';
     }
-    
+
     $form .= '
-      </select>
-    </label>
-
-    <label for="gene-select">Gene:<br>
-      <select name="gene" id="gene-select">
-        <option value="">--Please choose a gene--</option>
-        ';
-    
-        $genes = array_unique(array_filter(array_column($data, 'genes')));
-        foreach ($genes as $gene) {
-          $form .= '<option value="' . $gene . '">' . $gene . '</option>';
-        }
-        
-        $form .= '
-      </select>
-    </label>
-
-    <label for="chromosome-select">Chromosome:<br>
-      <select name="chromosome" id="chromosome-select">
-        <option value="">--Please choose a chromosome--</option>
-        ';
-    
-        $chromosomes_of_interest = array_unique(array_filter(array_column($data, 'chromosome_of_interest')));
-        foreach ($chromosomes_of_interest as $chromosome_of_interest) {
-          $form .= '<option value="' . $chromosome_of_interest . '">' . $chromosome_of_interest . '</option>';
-        }
-        
-        $form .= '
-      </select>
-    </label>
-
     <input type="submit" name="submit" value="Submit">
   </form> 
   <br>
