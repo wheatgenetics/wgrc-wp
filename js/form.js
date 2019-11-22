@@ -38,4 +38,34 @@ jQuery(document).ready(function($) {
 
     return false;
   });
+
+  $( "#genus-select" ).change(function() {
+    var url = $(this).val(); // get selected value
+    
+    if (url) { // require a URL
+      window.location = 'http://wgrc.local?table=germplasm&genus=' + url; // redirect
+    }
+
+    return false;
+  });
+
+  $( "#species-select" ).change(function() {
+    var url = $(this).val(); // get selected value
+    
+    if (url) { // require a URL
+      window.location = 'http://wgrc.local?table=germplasm&species=' + url; // redirect
+    }
+
+    return false;
+  });
+
+  $( "#subtaxa-select" ).change(function() {
+    var url = $(this).val(); // get selected value
+    
+    if (url) { // require a URL
+      window.location = 'http://wgrc.local?table=germplasm&subtaxa=' + url; // redirect
+    }
+
+    return false;
+  });
 })
