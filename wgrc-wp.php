@@ -25,7 +25,7 @@ add_action('wp_enqueue_scripts', 'wgrc_scripts');
 function get_data($table) {
   global $wpdb;
 
-  $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$table} LIMIT 100", OBJECT );
+  $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$table} LIMIT 1000", OBJECT );
 
   return $results;
 }
