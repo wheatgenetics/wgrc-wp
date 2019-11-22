@@ -24,6 +24,7 @@ add_action('wp_enqueue_scripts', 'wgrc_scripts');
 
 function get_data($table) {
   global $wpdb;
+
   $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$table} LIMIT 100", OBJECT );
 
   return $results;
@@ -324,16 +325,20 @@ function handle_shortcode() {
 
   if (isset($_GET['table'])) {
     $table = $_GET['table'];
+    $stock_type = $_GET['stock_type'];
+    $genes = $_GET['genes'];
+    $chromosome_of_interest = $_GET['chromosome_of_interest'];
     // if ($table == 'genetic_stocks') {
     //   $display .= "Table: <b>Genetic Stocks</b><br><br>";
     // } elseif ($table = 'germplasm') {
     //   $display .= "Table: <b>Germplasm</b><br><br>";
     // }
 
-    $data = get_data($table);
+    $data = get_data($table);    
+
     $display .= display_form($data, $table);
 
-    $display .= display_data($data, $table);
+    $display .= display_data($data, $table, $genes);
   } else {
     $display .= display_form(NULL, '');
   }
