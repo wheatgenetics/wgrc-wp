@@ -12,14 +12,13 @@ if (!defined('ABSPATH')) {
 
 function register_scripts() {
   wp_register_style('wgrc-style', plugins_url('/css/style.css', __FILE__), false, '1.0.0', 'all');
-  // wp_register_script( 'custom_jquery', plugins_url('/js/custom-jquery.js', __FILE__), array('jquery'), '2.5.1' );
+  wp_register_script( 'wgrc-form', plugins_url('/js/form.js', __FILE__), array('jquery'), '2.5.1' );
 }
 add_action('init', 'register_scripts');
 
 function wgrc_scripts(){
   wp_enqueue_style('wgrc-style');
-  	// wp_enqueue_script('custom_jquery');
-
+  wp_enqueue_script('wgrc-form');
 }
 add_action('wp_enqueue_scripts', 'wgrc_scripts');
 
@@ -32,7 +31,7 @@ function get_data($table) {
 
 function display_form($data, $table = '') {
   $form = '
-  <form id="wgrc-wp-form" method="post" action="">
+  <form id="wgrc-wp-form" method="get" action="">
     <label for="table-select"><strong>Table:</strong><br>
       <select name="table" id="table-select">
         <option value="">--Please choose a table--</option>
@@ -323,8 +322,8 @@ function display_data($data, $table) {
 function handle_shortcode() {
   $display = '';
 
-  if (isset($_POST['submit'])) {
-    $table = $_POST['table'];
+  if (isset($_GET['table'])) {
+    $table = $_GET['table'];
     // if ($table == 'genetic_stocks') {
     //   $display .= "Table: <b>Genetic Stocks</b><br><br>";
     // } elseif ($table = 'germplasm') {
