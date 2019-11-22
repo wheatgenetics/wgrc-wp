@@ -25,25 +25,25 @@ add_action('wp_enqueue_scripts', 'wgrc_scripts');
 function get_data($table) {
   global $wpdb;
 
-  $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$table} LIMIT 1000", OBJECT );
+  $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$table} LIMIT 300", OBJECT );
 
   return $results;
 }
 
-function display_form($data, $table = '') {
+function display_form($data, $selected_table = '', $selected_stock_type = '', $selected_gene = '', $selected_chromosome_of_interest = '', $selected_genus = '', $selected_species = '', $selected_subtaxa = '') {
   $form = '
   <form id="wgrc-wp-form" method="get" action="">
     <label for="table-select"><strong>Table:</strong><br>
       <select name="table" id="table-select">
         <option value="">--Please choose a table--</option>
-        <option value="genetic_stocks"' . ($table=="genetic_stocks" ? "selected" : "") . '>Genetic Stocks</option>
-        <option value="germplasm"' . ($table=="germplasm" ? "selected" : "") . '>Germplasm</option>
+        <option value="genetic_stocks"' . ($selected_table=="genetic_stocks" ? "selected" : "") . '>Genetic Stocks</option>
+        <option value="germplasm"' . ($selected_table=="germplasm" ? "selected" : "") . '>Germplasm</option>
       </select>
     </label>
     ';
 
     if ($data) {
-      if ($table == 'genetic_stocks') {
+      if ($selected_table == 'genetic_stocks') {
         $form .= '
         <label for="type-select"><strong>Type:</strong><br>
           <select name="type" id="type-select">
@@ -53,7 +53,7 @@ function display_form($data, $table = '') {
         $stock_types = array_unique(array_filter(array_column($data, 'stock_type')));
         
         foreach ($stock_types as $stock_type) {
-          $form .= '<option value="' . $stock_type . '">' . $stock_type . '</option>';
+          $form .= '<option value="' . $stock_type . '"' . ($stock_type==$selected_stock_type ? "selected" : "") . '>' . $stock_type . '</option>';
         }
         
         $form .= '
@@ -68,7 +68,7 @@ function display_form($data, $table = '') {
             $genes = array_unique(array_filter(array_column($data, 'genes')));
             
             foreach ($genes as $gene) {
-              $form .= '<option value="' . $gene . '">' . $gene . '</option>';
+              $form .= '<option value="' . $gene . '"' . ($gene==$selected_gene ? "selected" : "") . '>' . $gene . '</option>';
             }
             
             $form .= '
@@ -83,14 +83,14 @@ function display_form($data, $table = '') {
             $chromosomes_of_interest = array_unique(array_filter(array_column($data, 'chromosome_of_interest')));
             
             foreach ($chromosomes_of_interest as $chromosome_of_interest) {
-              $form .= '<option value="' . $chromosome_of_interest . '">' . $chromosome_of_interest . '</option>';
+              $form .= '<option value="' . $chromosome_of_interest . '"' . ($chromosome_of_interest==$selected_chromosome_of_interest ? "selected" : "") . '>' . $chromosome_of_interest . '</option>';
             }
             
             $form .= '
           </select>
         </label>
         ';
-      } elseif ($table == 'germplasm') {
+      } elseif ($selected_table == 'germplasm') {
         $form .= '
         <label for="genus-select"><strong>Genus:</strong><br>
           <select name="genus" id="genus-select">
@@ -99,7 +99,7 @@ function display_form($data, $table = '') {
 
         $genera = array_unique(array_filter(array_column($data, 'GENUS')));
         foreach ($genera as $genus) {
-          $form .= '<option value="' . $genus . '">' . $genus . '</option>';
+          $form .= '<option value="' . $genus . '"' . ($genus==$selected_genus ? "selected" : "") . '>' . $genus . '</option>';
         }
         
         $form .= '
@@ -114,7 +114,7 @@ function display_form($data, $table = '') {
             $all_species = array_unique(array_filter(array_column($data, 'SPECIES')));
             
             foreach ($all_species as $species) {
-              $form .= '<option value="' . $species . '">' . $species . '</option>';
+              $form .= '<option value="' . $species . '"' . ($species==$selected_species ? "selected" : "") . '>' . $species . '</option>';
             }
             
             $form .= '
@@ -129,7 +129,7 @@ function display_form($data, $table = '') {
             $all_subtaxa = array_unique(array_filter(array_column($data, 'SUBTAXA')));
             
             foreach ($all_subtaxa as $subtaxa) {
-              $form .= '<option value="' . $subtaxa . '">' . $subtaxa . '</option>';
+              $form .= '<option value="' . $subtaxa . '"' . ($subtaxa==$selected_subtaxa ? "selected" : "") . '>' . $subtaxa . '</option>';
             }
             
             $form .= '
@@ -369,7 +369,7 @@ function handle_shortcode() {
     $filtered_data = $data;
   }
   
-  $display .= display_form($data, $table);
+  $display .= display_form($data, $table, $stock_type, $genes, $chromosome_of_interest, $genus, $species, $subtaxa);
 
   $display .= display_data($filtered_data, $table);
 
