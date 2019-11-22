@@ -325,58 +325,53 @@ function handle_shortcode() {
 
   if (isset($_GET['table'])) {
     $table = $_GET['table'];
-
-    // genetic_stocks parameters
-    $stock_type = $_GET['stock_type'];
-    $genes = $_GET['genes'];
-    $chromosome_of_interest = $_GET['chromosome_of_interest'];
-
-    // germplasm parameters
-    $genus = $_GET['genus'];
-    $species = $_GET['species'];
-    $subtaxa = $_GET['subtaxa'];
-    // if ($table == 'genetic_stocks') {
-    //   $display .= "Table: <b>Genetic Stocks</b><br><br>";
-    // } elseif ($table = 'germplasm') {
-    //   $display .= "Table: <b>Germplasm</b><br><br>";
-    // }
-
-    $data = get_data($table);
-
-    if ($stock_type) {
-      $filtered_data = array_filter($data, function ($obj) use ($stock_type) {
-        return ($obj->stock_type == $stock_type);
-      });
-    } elseif ($genes) {
-      $filtered_data = array_filter($data, function ($obj) use ($genes) {
-        return ($obj->genes == $genes);
-      });
-    } elseif ($chromosome_of_interest) {
-      $filtered_data = array_filter($data, function ($obj) use ($chromosome_of_interest) {
-        return ($obj->chromosome_of_interest == $chromosome_of_interest);
-      });
-    } elseif ($genus) {
-      $filtered_data = array_filter($data, function ($obj) use ($genus) {
-        return ($obj->GENUS == $genus);
-      });
-    } elseif ($species) {
-      $filtered_data = array_filter($data, function ($obj) use ($species) {
-        return ($obj->SPECIES == $species);
-      });
-    } elseif ($subtaxa) {
-      $filtered_data = array_filter($data, function ($obj) use ($subtaxa) {
-        return ($obj->SUBTAXA == $subtaxa);
-      });
-    } else {
-      $filtered_data = $data;
-    }
-
-    $display .= display_form($data, $table);
-
-    $display .= display_data($filtered_data, $table);
   } else {
-    $display .= display_form(NULL, '');
+    $table = 'genetic_stocks';
   }
+
+  // genetic_stocks parameters
+  $stock_type = $_GET['stock_type'];
+  $genes = $_GET['genes'];
+  $chromosome_of_interest = $_GET['chromosome_of_interest'];
+
+  // germplasm parameters
+  $genus = $_GET['genus'];
+  $species = $_GET['species'];
+  $subtaxa = $_GET['subtaxa'];
+
+  $data = get_data($table);
+
+  if ($stock_type) {
+    $filtered_data = array_filter($data, function ($obj) use ($stock_type) {
+      return ($obj->stock_type == $stock_type);
+    });
+  } elseif ($genes) {
+    $filtered_data = array_filter($data, function ($obj) use ($genes) {
+      return ($obj->genes == $genes);
+    });
+  } elseif ($chromosome_of_interest) {
+    $filtered_data = array_filter($data, function ($obj) use ($chromosome_of_interest) {
+      return ($obj->chromosome_of_interest == $chromosome_of_interest);
+    });
+  } elseif ($genus) {
+    $filtered_data = array_filter($data, function ($obj) use ($genus) {
+      return ($obj->GENUS == $genus);
+    });
+  } elseif ($species) {
+    $filtered_data = array_filter($data, function ($obj) use ($species) {
+      return ($obj->SPECIES == $species);
+    });
+  } elseif ($subtaxa) {
+    $filtered_data = array_filter($data, function ($obj) use ($subtaxa) {
+      return ($obj->SUBTAXA == $subtaxa);
+    });
+  } else {
+    $filtered_data = $data;
+  }
+  
+  $display .= display_form($data, $table);
+
+  $display .= display_data($filtered_data, $table);
 
   return $display;
 }
