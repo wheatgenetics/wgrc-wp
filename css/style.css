@@ -2,6 +2,12 @@ form#wgrc-wp-form {
   padding: 20px 0 30px;
   display: grid;
   grid-auto-flow: column;
+  align-items: end;
+  grid-gap: 1.3em;
+}
+
+form#wgrc-wp-form p {
+  margin: 0;
 }
 
 .grid {
