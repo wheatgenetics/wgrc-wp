@@ -1,7 +1,7 @@
 form#wgrc-wp-form {
   padding: 20px 0 30px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: column;
 }
 
 .grid {
