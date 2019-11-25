@@ -145,6 +145,7 @@ function display_form($data, $selected_table = '', $selected_stock_type = '', $s
   <br>
   ';
 
+  $form .= '<p>View these entries at <a href="https://www.genesys-pgr.org/a/overview/v275pxlWdY4" target="_blank">Genesys</a></p>';
   return $form;
 }
 
