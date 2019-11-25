@@ -141,11 +141,11 @@ function display_form($data, $selected_table = '', $selected_stock_type = '', $s
 
     $form .= '
     <!-- <input type="submit" name="submit" value="Submit"> -->
+    <p>View these entries at <a href="https://www.genesys-pgr.org/a/overview/v275pxlWdY4" target="_blank">Genesys</a></p>
   </form> 
   <br>
   ';
 
-  $form .= '<p>View these entries at <a href="https://www.genesys-pgr.org/a/overview/v275pxlWdY4" target="_blank">Genesys</a></p>';
   return $form;
 }
 
