@@ -327,8 +327,6 @@ function handle_shortcode() {
 
   if (isset($_GET['table'])) {
     $table = $_GET['table'];
-  } else {
-    $table = 'genetic_stocks';
   }
 
   // genetic_stocks parameters
