@@ -377,4 +377,4 @@ function handle_shortcode() {
 
   return $display;
 }
-add_shortcode('latestPosts', 'handle_shortcode');
+add_shortcode('wgrc-db', 'handle_shortcode');
