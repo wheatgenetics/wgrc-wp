@@ -12,6 +12,7 @@ form#wgrc-wp-form p {
 
 .grid {
   display: grid;
+  overflow-x: scroll;
 }
 
 .grid > span {
