@@ -31,14 +31,22 @@ class WgrcData {
   function get_select_options($table, $select_box_name) {
     global $wpdb;
 
-    $results = $wpdb->get_results( "SELECT DISTINCT {$select_box_name} FROM {$wpdb->prefix}{$table}", OBJECT );
+    $results = $wpdb->get_results("SELECT DISTINCT {$select_box_name} FROM {$wpdb->prefix}{$table}", OBJECT);
     return $results;
   }
-  
-  function get_data($table, $where_clause) {
+
+  function get_total_pages($table) {
     global $wpdb;
 
-    $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$table} {$where_clause} LIMIT 300", OBJECT );
+    $total_rows = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}{$table}");
+    $total_pages = ceil($total_rows / 30);
+    return $total_pages;
+  }
+  
+  function get_data($table, $where_clause, $offset) {
+    global $wpdb;
+
+    $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}{$table} {$where_clause} LIMIT $offset, 30", OBJECT);
 
     return $results;
   }
@@ -157,12 +165,54 @@ class WgrcData {
 
       $form .= '
     </form>
-
-    
     <br>
     ';
 
     return $form;
+  }
+
+  function display_pagination($pageno, $total_pages) {
+    $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    
+    if ($pageno < $total_pages) {
+      $current_url = preg_replace('/&pageno=\d+/', '', $current_url);
+    }
+    
+    $pagination = '
+    <ul class="pagination">
+      <li><a href="' . $current_url . '&pageno=1">First</a></li>
+      <li class="';
+
+    $pagination .= '">
+      <a href="' . $current_url;
+
+    if ($pageno <= 1) {
+      $pagination .= '#';
+    } else {
+      $pagination .= "&pageno=" . ($pageno - 1);
+    } 
+    
+    $pagination .= '">Prev</a>
+      </li>
+      <li class="';
+    
+    $pagination .= '">
+      <a href="' . $current_url;
+    
+    if ($pageno >= $total_pages) {
+      $pagination .= '#';
+    } else {
+      $pagination .= '&pageno=' . ($pageno + 1);
+    }
+    
+    $pagination .= '">Next</a>
+      </li>
+      <li>
+        <a href="' . $current_url . '&pageno=' . $total_pages . '">Last</a>
+        </li>
+    </ul>';
+
+    return $pagination;
   }
 
   function display_data($data, $table) {
@@ -294,6 +344,14 @@ class WgrcData {
     $species = $_GET['species'];
     $subtaxa = $_GET['subtaxa'];
 
+    // Pagination
+    if (isset($_GET['pageno'])) {
+      $pageno = $_GET['pageno'];
+    } else {
+      $pageno = 1;
+    }
+    $offset = ($pageno-1) * 30;
+
     $where_clause = ''; // No WHERE clause has been created yet.
 
     if ($stock_type) {
@@ -310,8 +368,12 @@ class WgrcData {
       $where_clause = 'WHERE SUBTAXA = "' . $subtaxa . '"';
     }
 
-    $data = $this->get_data($table, $where_clause);
-    
+    $total_pages = $this->get_total_pages($table);
+
+    $data = $this->get_data($table, $where_clause, $offset);
+
+    $display .= $this->display_pagination($pageno, $total_pages);
+
     $display .= $this->display_form($data, $table, $stock_type, $genes, $chromosome_of_interest, $genus, $species, $subtaxa);
 
     $display .= $this->display_data($data, $table);
