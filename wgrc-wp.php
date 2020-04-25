@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WGRC WP
-Description: This plugin embeds a database view of the WGRC database to a WordPress page using shortcode.
+Description: This plugin embeds a database view of the WGRC database to a WordPress page using shortcode. The WGRC data has already been imported into the WordPress database with the creation of two tables: wp_genetic_stocks and wp_germplasm
 Version: 1.0
 */
 
