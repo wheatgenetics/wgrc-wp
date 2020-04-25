@@ -1,7 +1,8 @@
 <?php
 /*
 Plugin Name: WGRC WP
-Description: This plugin embeds a database view of the WGRC database to a WordPress page using shortcode. The WGRC data has already been imported into the WordPress database with the creation of two tables: wp_genetic_stocks and wp_germplasm
+Description: This plugin embeds a database view of the WGRC database to a WordPress page using shortcode.
+The WGRC data has already been imported into the WordPress database with the creation of two tables: wp_genetic_stocks and wp_germplasm
 Version: 1.0
 */
 
@@ -147,7 +148,6 @@ class WgrcData {
       }
 
       $form .= '
-      <!-- <input type="submit" name="submit" value="Submit"> -->
     </form> 
     <br>
     ';
@@ -167,7 +167,6 @@ class WgrcData {
 
       $results .= '
       <div class="grid">
-        <!-- <span class="gray-header">TA_Key</span> -->
         <span class="gray-header">TA Number</span>
         <span class="gray-header">Line Number</span>
         <span class="gray-header">Subline Number</span>
@@ -178,31 +177,15 @@ class WgrcData {
         <span class="gray-header">Chromosome of Interest</span>
         <span class="gray-header">Donor Species or Cultivar</span>
         <span class="gray-header">Constitution</span>
-        <!-- <span class="gray-header">source</span> -->
-        <!-- <span class="gray-header">source_id</span> -->
-        <!-- <span class="gray-header">source_seed</span> -->
-        <!-- <span class="gray-header">pi_number</span> -->
-        <!-- <span class="gray-header">alias</span> -->
         <span class="gray-header">2n=</span>
         <span class="gray-header">Genes</span>
         <span class="gray-header">Chromosome Location</span>
         <span class="gray-header">Phenotypic Trait(s)</span>
         <span class="gray-header">Notes</span>
-        <!-- <span class="gray-header">caution</span> -->
-        <!-- <span class="gray-header">GBS</span> -->
-        <!-- <span class="gray-header">banding</span> -->
-        <!-- <span class="gray-header">count</span> -->
         <span class="gray-header">Pedigree</span>
-        <!-- <span class="gray-header">last_seed_increase</span> -->
-        <!-- <span class="gray-header">other_si</span> -->
-        <!-- <span class="gray-header">germ_check</span> -->
-        <!-- <span class="gray-header">reference</span> -->
-        <!-- <span class="gray-header">acquisition_date</span> -->
-        <!-- <span class="gray-header">available</span> -->
       ';
 
       foreach ($data as $obj) {
-        // $results .= "<span class='data-cell'>" . $obj->TA_Key . "</span>";
         $results .= "<span class='data-cell'>" . $obj->TA_number . "</span>";
         $results .= "<span class='data-cell'>" . $obj->line_number . "</span>";
         $results .= "<span class='data-cell'>" . $obj->subline_number . "</span>";
@@ -213,27 +196,12 @@ class WgrcData {
         $results .= "<span class='data-cell'>" . $obj->chromosome_of_interest . "</span>";
         $results .= "<span class='data-cell'>" . $obj->donor_species_cultivar . "</span>";
         $results .= "<span class='data-cell'>" . $obj->constitution . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->source . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->source_id . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->source_seed . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->pi_number . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->alias . "</span>";
         $results .= "<span class='data-cell'>" . $obj->two_n_equals . "</span>";
         $results .= "<span class='data-cell'>" . $obj->genes . "</span>";
         $results .= "<span class='data-cell'>" . $obj->chromosome_location . "</span>";
         $results .= "<span class='data-cell'>" . $obj->phenotypic_traits . "</span>";
         $results .= "<span class='data-cell'>" . $obj->notes . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->caution . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->GBS . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->banding . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->count . "</span>";
         $results .= "<span class='data-cell'>" . $obj->pedigree . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->last_seed_increase . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->other_si . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->germ_check . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->reference . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->acquisition_date . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->available . "</span>";
       }
     } elseif ($table == 'germplasm') {
       $results .= '
@@ -246,77 +214,49 @@ class WgrcData {
 
       $results .= '
       <div class="grid">
-        <!-- <span class="gray-header">TA Key</span> -->
         <span class="gray-header">TA Number</span>
         <span class="gray-header">Line Number</span>
-        <!-- <span class="gray-header">PUID</span> -->
-        <!-- <span class="gray-header">INSTCODE</span> -->
-        <!-- <span class="gray-header">ACCESS NUMBER</span> -->
         <span class="gray-header">COLLECTION NUMBER</span>
         <span class="gray-header">COLLECTION CODE</span>
         <span class="gray-header">GENUS</span>
         <span class="gray-header">SPECIES</span>
-        <!-- <span class="gray-header">SPECIES AUTHOR</span> -->
         <span class="gray-header">SUBTAXA</span>
         <span class="gray-header">VARIETY</span>
-        <!-- <span class="gray-header">SUBTAXA AUTHOR</span> -->
-        <!-- <span class="gray-header">ACCESS NAME</span> -->
-        <!-- <span class="gray-header">ACQUISITION DATE</span> -->
         <span class="gray-header">ORIGINAL COUNTRY</span>
         <span class="gray-header">COLLECTION SITE</span>
         <span class="gray-header">DECLINATION LATITUDE</span>
         <span class="gray-header">DECLINATION LONGITUDE</span>
         <span class="gray-header">ELEVATION</span>
-        <!-- <span class="gray-header">GEOREFMETH</span> -->
         <span class="gray-header">COLLECTION DATE</span>
-        <!-- <span class="gray-header">SAMPSTAT</span> -->
-        <!-- <span class="gray-header">COLLECTION SOURCE</span> -->
         <span class="gray-header">DONOR CODE</span>
         <span class="gray-header">DONOR NAME</span>
         <span class="gray-header">DONOR NUMBER</span>
         <span class="gray-header">OTHER NUMBER</span>
-        <!-- <span class="gray-header">STORAGE</span> -->
         <span class="gray-header">REMARKS</span>
-        <!-- <span class="gray-header">LAST_SEED_INCREASE</span> -->
-        <!-- <span class="gray-header">OTHER_SI</span> -->
         <span class="gray-header">CORE</span>
         <span class="gray-header">Available</span>
       ';
 
       foreach ($data as $obj) {
-        // $results .= "<span class='data-cell'>" . $obj->TA_Key . "</span>";
         $results .= "<span class='data-cell'>" . $obj->TA_number . "</span>";
         $results .= "<span class='data-cell'>" . $obj->line_number . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->PUID . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->INSTCODE . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->ACCENUMB . "</span>";
         $results .= "<span class='data-cell'>" . $obj->COLLNUMB . "</span>";
         $results .= "<span class='data-cell'>" . $obj->COLLCODE . "</span>";
         $results .= "<span class='data-cell'>" . $obj->GENUS . "</span>";
         $results .= "<span class='data-cell'>" . $obj->SPECIES . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->SPAUTHOR . "</span>";
         $results .= "<span class='data-cell'>" . $obj->SUBTAXA . "</span>";
         $results .= "<span class='data-cell'>" . $obj->VARIETY . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->SUBTAUTHOR . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->ACCENAME . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->ACQDATE . "</span>";
         $results .= "<span class='data-cell'>" . $obj->ORIGCTY . "</span>";
         $results .= "<span class='data-cell'>" . $obj->COLLSITE . "</span>";
         $results .= "<span class='data-cell'>" . $obj->DECLATITUDE . "</span>";
         $results .= "<span class='data-cell'>" . $obj->DECLONGITUDE . "</span>";
         $results .= "<span class='data-cell'>" . $obj->ELEVATION . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->GEOREFMETH . "</span>";
         $results .= "<span class='data-cell'>" . $obj->COLLDATE . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->SAMPSTAT . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->COLLSRC . "</span>";
         $results .= "<span class='data-cell'>" . $obj->DONORCODE . "</span>";
         $results .= "<span class='data-cell'>" . $obj->DONORNAME . "</span>";
         $results .= "<span class='data-cell'>" . $obj->DONORNUMB . "</span>";
         $results .= "<span class='data-cell'>" . $obj->OTHERNUMB . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->STORAGE . "</span>";
         $results .= "<span class='data-cell'>" . $obj->REMARKS . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->LAST_SEED_INCREASE . "</span>";
-        // $results .= "<span class='data-cell'>" . $obj->OTHER_SI . "</span>";
         $results .= "<span class='data-cell'>" . $obj->CORE . "</span>";
         $results .= "<span class='data-cell'>" . $obj->Available . "</span>";
       }
