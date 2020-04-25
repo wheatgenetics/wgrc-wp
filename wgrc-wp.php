@@ -31,7 +31,7 @@ class WgrcData {
   function get_select_options($table, $select_box_name) {
     global $wpdb;
 
-    $results = $wpdb->get_results( "SELECT DISTINCT {$select_box_name} FROM {$wpdb->prefix}{$table} LIMIT 300", OBJECT );
+    $results = $wpdb->get_results( "SELECT DISTINCT {$select_box_name} FROM {$wpdb->prefix}{$table}", OBJECT );
     return $results;
   }
   
@@ -156,7 +156,9 @@ class WgrcData {
       }
 
       $form .= '
-    </form> 
+    </form>
+
+    
     <br>
     ';
 
