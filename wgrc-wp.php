@@ -177,7 +177,8 @@ class WgrcData {
     $current_url = preg_replace('/&pageno=\d+/', '', $current_url);
     
     $pagination = '
-    <div>
+    <div id="pagination-wrapper">
+      Number of records per page: 30<br>
       <a href="' . $current_url . '&pageno=1">First</a>
       <a href="' . $current_url;
 
