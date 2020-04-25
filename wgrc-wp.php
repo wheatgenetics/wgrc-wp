@@ -174,10 +174,7 @@ class WgrcData {
 
   function display_pagination($pageno, $total_pages) {
     $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    
-    // if ($pageno < $total_pages) {
-      $current_url = preg_replace('/&pageno=\d+/', '', $current_url);
-    // }
+    $current_url = preg_replace('/&pageno=\d+/', '', $current_url);
     
     $pagination = '
     <div>
