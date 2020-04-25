@@ -309,34 +309,6 @@ class WgrcData {
     }
 
     $data = $this->get_data($table, $where_clause);
-
-    // if ($stock_type) {
-    //   $filtered_data = array_filter($data, function ($obj) use ($stock_type) {
-    //     return ($obj->stock_type == $stock_type);
-    //   });
-    // } elseif ($genes) {
-    //   $filtered_data = array_filter($data, function ($obj) use ($genes) {
-    //     return ($obj->genes == $genes);
-    //   });
-    // } elseif ($chromosome_of_interest) {
-    //   $filtered_data = array_filter($data, function ($obj) use ($chromosome_of_interest) {
-    //     return ($obj->chromosome_of_interest == $chromosome_of_interest);
-    //   });
-    // } elseif ($genus) {
-    //   $filtered_data = array_filter($data, function ($obj) use ($genus) {
-    //     return ($obj->GENUS == $genus);
-    //   });
-    // } elseif ($species) {
-    //   $filtered_data = array_filter($data, function ($obj) use ($species) {
-    //     return ($obj->SPECIES == $species);
-    //   });
-    // } elseif ($subtaxa) {
-    //   $filtered_data = array_filter($data, function ($obj) use ($subtaxa) {
-    //     return ($obj->SUBTAXA == $subtaxa);
-    //   });
-    // } else {
-    //   $filtered_data = $data;
-    // }
     
     $display .= $this->display_form($data, $table, $stock_type, $genes, $chromosome_of_interest, $genus, $species, $subtaxa);
 
