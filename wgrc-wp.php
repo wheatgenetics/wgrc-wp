@@ -31,7 +31,7 @@ class WgrcData {
   function get_select_options($table, $select_box_name) {
     global $wpdb;
 
-    $results = $wpdb->get_results("SELECT DISTINCT {$select_box_name} FROM {$wpdb->prefix}{$table}", OBJECT);
+    $results = $wpdb->get_results("SELECT DISTINCT {$select_box_name} FROM {$wpdb->prefix}{$table} WHERE {$select_box_name} <> ''", OBJECT);
     return $results;
   }
 
@@ -39,9 +39,8 @@ class WgrcData {
     global $wpdb;
 
     $total_rows = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}{$table} {$where_clause}");
-      $total_pages = ceil($total_rows / 30);
+    $total_pages = ceil($total_rows / 30);
     
-
     return $total_pages;
   }
   
