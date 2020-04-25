@@ -27,6 +27,13 @@ class WgrcData {
     wp_enqueue_style('wgrc-style');
     wp_enqueue_script('wgrc-form');
   }
+
+  function get_select_options($table, $select_box_name) {
+    global $wpdb;
+
+    $results = $wpdb->get_results( "SELECT DISTINCT {$select_box_name} FROM {$wpdb->prefix}{$table} LIMIT 300", OBJECT );
+    return $results;
+  }
   
   function get_data($table, $where_clause) {
     global $wpdb;
@@ -56,10 +63,10 @@ class WgrcData {
               <option value="">--Please choose a type--</option>
           ';
 
-          $stock_types = array_unique(array_filter(array_column($data, 'stock_type')));
+          $stock_types = $this->get_select_options($selected_table, 'stock_type');
           
           foreach ($stock_types as $stock_type) {
-            $form .= '<option value="' . $stock_type . '"' . ($stock_type==$selected_stock_type ? "selected" : "") . '>' . $stock_type . '</option>';
+            $form .= '<option value="' . $stock_type->stock_type . '"' . ($stock_type->stock_type==$selected_stock_type ? "selected" : "") . '>' . $stock_type->stock_type . '</option>';
           }
           
           $form .= '
@@ -71,10 +78,10 @@ class WgrcData {
               <option value="">--Please choose a gene--</option>
               ';
           
-              $genes = array_unique(array_filter(array_column($data, 'genes')));
+              $genes = $this->get_select_options($selected_table, 'genes');
               
               foreach ($genes as $gene) {
-                $form .= '<option value="' . $gene . '"' . ($gene==$selected_gene ? "selected" : "") . '>' . $gene . '</option>';
+                $form .= '<option value="' . $gene->genes . '"' . ($gene->genes==$selected_gene ? "selected" : "") . '>' . $gene->genes . '</option>';
               }
               
               $form .= '
@@ -86,10 +93,10 @@ class WgrcData {
               <option value="">--Please choose a chromosome--</option>
               ';
           
-              $chromosomes_of_interest = array_unique(array_filter(array_column($data, 'chromosome_of_interest')));
+              $chromosomes_of_interest = $this->get_select_options($selected_table, 'chromosome_of_interest');
               
               foreach ($chromosomes_of_interest as $chromosome_of_interest) {
-                $form .= '<option value="' . $chromosome_of_interest . '"' . ($chromosome_of_interest==$selected_chromosome_of_interest ? "selected" : "") . '>' . $chromosome_of_interest . '</option>';
+                $form .= '<option value="' . $chromosome_of_interest->chromosome_of_interest . '"' . ($chromosome_of_interest->chromosome_of_interest==$selected_chromosome_of_interest ? "selected" : "") . '>' . $chromosome_of_interest->chromosome_of_interest . '</option>';
               }
               
               $form .= '
@@ -103,9 +110,10 @@ class WgrcData {
               <option value="">--Please choose a genus--</option>
           ';
 
-          $genera = array_unique(array_filter(array_column($data, 'GENUS')));
+          $genera = $this->get_select_options($selected_table, 'GENUS');
+
           foreach ($genera as $genus) {
-            $form .= '<option value="' . $genus . '"' . ($genus==$selected_genus ? "selected" : "") . '>' . $genus . '</option>';
+            $form .= '<option value="' . $genus->GENUS . '"' . ($genus->GENUS==$selected_genus ? "selected" : "") . '>' . $genus->GENUS . '</option>';
           }
           
           $form .= '
@@ -117,10 +125,10 @@ class WgrcData {
               <option value="">--Please choose a species--</option>
               ';
           
-              $all_species = array_unique(array_filter(array_column($data, 'SPECIES')));
+              $all_species = $this->get_select_options($selected_table, 'SPECIES');
               
               foreach ($all_species as $species) {
-                $form .= '<option value="' . $species . '"' . ($species==$selected_species ? "selected" : "") . '>' . $species . '</option>';
+                $form .= '<option value="' . $species->SPECIES . '"' . ($species->SPECIES==$selected_species ? "selected" : "") . '>' . $species->SPECIES . '</option>';
               }
               
               $form .= '
@@ -132,10 +140,10 @@ class WgrcData {
               <option value="">--Please choose a subtaxa--</option>
               ';
           
-              $all_subtaxa = array_unique(array_filter(array_column($data, 'SUBTAXA')));
+              $all_subtaxa = $this->get_select_options($selected_table, 'SUBTAXA');
               
               foreach ($all_subtaxa as $subtaxa) {
-                $form .= '<option value="' . $subtaxa . '"' . ($subtaxa==$selected_subtaxa ? "selected" : "") . '>' . $subtaxa . '</option>';
+                $form .= '<option value="' . $subtaxa->SUBTAXA . '"' . ($subtaxa->SUBTAXA==$selected_subtaxa ? "selected" : "") . '>' . $subtaxa->SUBTAXA . '</option>';
               }
               
               $form .= '
