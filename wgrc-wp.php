@@ -35,11 +35,13 @@ class WgrcData {
     return $results;
   }
 
-  function get_total_pages($table) {
+  function get_total_pages($table, $where_clause) {
     global $wpdb;
 
-    $total_rows = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}{$table}");
-    $total_pages = ceil($total_rows / 30);
+    $total_rows = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}{$table} {$where_clause}");
+      $total_pages = ceil($total_rows / 30);
+    
+
     return $total_pages;
   }
   
@@ -178,12 +180,8 @@ class WgrcData {
       $current_url = preg_replace('/&pageno=\d+/', '', $current_url);
     }
     
-    $pagination = '
-    <ul class="pagination">
-      <li><a href="' . $current_url . '&pageno=1">First</a></li>
-      <li class="';
-
-    $pagination .= '">
+    $pagination = '<div>
+      <a href="' . $current_url . '&pageno=1">First</a>
       <a href="' . $current_url;
 
     if ($pageno <= 1) {
@@ -193,10 +191,6 @@ class WgrcData {
     } 
     
     $pagination .= '">Prev</a>
-      </li>
-      <li class="';
-    
-    $pagination .= '">
       <a href="' . $current_url;
     
     if ($pageno >= $total_pages) {
@@ -206,11 +200,8 @@ class WgrcData {
     }
     
     $pagination .= '">Next</a>
-      </li>
-      <li>
         <a href="' . $current_url . '&pageno=' . $total_pages . '">Last</a>
-        </li>
-    </ul>';
+        </div>';
 
     return $pagination;
   }
@@ -368,13 +359,13 @@ class WgrcData {
       $where_clause = 'WHERE SUBTAXA = "' . $subtaxa . '"';
     }
 
-    $total_pages = $this->get_total_pages($table);
+    $total_pages = $this->get_total_pages($table, $where_clause);
 
     $data = $this->get_data($table, $where_clause, $offset);
 
-    $display .= $this->display_pagination($pageno, $total_pages);
-
     $display .= $this->display_form($data, $table, $stock_type, $genes, $chromosome_of_interest, $genus, $species, $subtaxa);
+
+    $display .= $this->display_pagination($pageno, $total_pages);
 
     $display .= $this->display_data($data, $table);
 
