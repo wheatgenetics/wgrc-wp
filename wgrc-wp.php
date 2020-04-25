@@ -175,32 +175,33 @@ class WgrcData {
   function display_pagination($pageno, $total_pages) {
     $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     
-    if ($pageno < $total_pages) {
+    // if ($pageno < $total_pages) {
       $current_url = preg_replace('/&pageno=\d+/', '', $current_url);
-    }
+    // }
     
-    $pagination = '<div>
+    $pagination = '
+    <div>
       <a href="' . $current_url . '&pageno=1">First</a>
       <a href="' . $current_url;
 
-    if ($pageno <= 1) {
-      $pagination .= '#';
-    } else {
-      $pagination .= "&pageno=" . ($pageno - 1);
-    } 
-    
-    $pagination .= '">Prev</a>
+      if ($pageno <= 1) {
+        $pagination .= '&pageno=' . ($pageno);
+      } else {
+        $pagination .= "&pageno=" . ($pageno - 1);
+      } 
+      $pagination .= '">Prev</a>
+
       <a href="' . $current_url;
-    
-    if ($pageno >= $total_pages) {
-      $pagination .= '#';
-    } else {
-      $pagination .= '&pageno=' . ($pageno + 1);
-    }
-    
-    $pagination .= '">Next</a>
-        <a href="' . $current_url . '&pageno=' . $total_pages . '">Last</a>
-        </div>';
+      
+      if ($pageno >= $total_pages) {
+        $pagination .= '&pageno=' . ($pageno);
+      } else {
+        $pagination .= '&pageno=' . ($pageno + 1);
+      }
+      $pagination .= '">Next</a>
+
+      <a href="' . $current_url . '&pageno=' . $total_pages . '">Last</a>
+    </div>';
 
     return $pagination;
   }
