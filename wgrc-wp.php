@@ -179,7 +179,7 @@ class WgrcData {
     $pagination = '
     <div id="pagination-wrapper">
       Number of records per page: 30<br>
-      <a href="' . $current_url . '&pageno=1">First</a>
+      <a href="' . $current_url . '&pageno=1">First</a> |
       <a href="' . $current_url;
 
       if ($pageno <= 1) {
@@ -187,7 +187,7 @@ class WgrcData {
       } else {
         $pagination .= "&pageno=" . ($pageno - 1);
       } 
-      $pagination .= '">Prev</a>
+      $pagination .= '">Prev</a> |
 
       <a href="' . $current_url;
       
@@ -196,7 +196,7 @@ class WgrcData {
       } else {
         $pagination .= '&pageno=' . ($pageno + 1);
       }
-      $pagination .= '">Next</a>
+      $pagination .= '">Next</a> |
 
       <a href="' . $current_url . '&pageno=' . $total_pages . '">Last</a>
     </div>';
