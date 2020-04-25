@@ -366,7 +366,9 @@ class WgrcData {
 
     $display .= $this->display_form($data, $table, $stock_type, $genes, $chromosome_of_interest, $genus, $species, $subtaxa);
 
-    $display .= $this->display_pagination($pageno, $total_rows, $total_pages);
+    if ($data) {
+      $display .= $this->display_pagination($pageno, $total_rows, $total_pages);
+    }
 
     $display .= $this->display_data($data, $table);
 
