@@ -28,10 +28,10 @@ class WgrcData {
     wp_enqueue_script('wgrc-form');
   }
   
-  function get_data($table) {
+  function get_data($table, $where_clause) {
     global $wpdb;
 
-    $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$table} LIMIT 300", OBJECT );
+    $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$table} {$where_clause} LIMIT 300", OBJECT );
 
     return $results;
   }
@@ -284,39 +284,55 @@ class WgrcData {
     $species = $_GET['species'];
     $subtaxa = $_GET['subtaxa'];
 
-    $data = $this->get_data($table);
+    $where_clause = ''; // No WHERE clause has been created yet.
 
     if ($stock_type) {
-      $filtered_data = array_filter($data, function ($obj) use ($stock_type) {
-        return ($obj->stock_type == $stock_type);
-      });
+      $where_clause = 'WHERE stock_type = "' . $stock_type . '"';
     } elseif ($genes) {
-      $filtered_data = array_filter($data, function ($obj) use ($genes) {
-        return ($obj->genes == $genes);
-      });
+      $where_clause = 'WHERE genes = "' . $genes . '"';
     } elseif ($chromosome_of_interest) {
-      $filtered_data = array_filter($data, function ($obj) use ($chromosome_of_interest) {
-        return ($obj->chromosome_of_interest == $chromosome_of_interest);
-      });
+      $where_clause = 'WHERE chromosome_of_interest = "' . $chromosome_of_interest . '"';
     } elseif ($genus) {
-      $filtered_data = array_filter($data, function ($obj) use ($genus) {
-        return ($obj->GENUS == $genus);
-      });
+      $where_clause = 'WHERE GENUS = "' . $genus . '"';
     } elseif ($species) {
-      $filtered_data = array_filter($data, function ($obj) use ($species) {
-        return ($obj->SPECIES == $species);
-      });
+      $where_clause = 'WHERE SPECIES = "' . $species . '"';
     } elseif ($subtaxa) {
-      $filtered_data = array_filter($data, function ($obj) use ($subtaxa) {
-        return ($obj->SUBTAXA == $subtaxa);
-      });
-    } else {
-      $filtered_data = $data;
+      $where_clause = 'WHERE SUBTAXA = "' . $subtaxa . '"';
     }
+
+    $data = $this->get_data($table, $where_clause);
+
+    // if ($stock_type) {
+    //   $filtered_data = array_filter($data, function ($obj) use ($stock_type) {
+    //     return ($obj->stock_type == $stock_type);
+    //   });
+    // } elseif ($genes) {
+    //   $filtered_data = array_filter($data, function ($obj) use ($genes) {
+    //     return ($obj->genes == $genes);
+    //   });
+    // } elseif ($chromosome_of_interest) {
+    //   $filtered_data = array_filter($data, function ($obj) use ($chromosome_of_interest) {
+    //     return ($obj->chromosome_of_interest == $chromosome_of_interest);
+    //   });
+    // } elseif ($genus) {
+    //   $filtered_data = array_filter($data, function ($obj) use ($genus) {
+    //     return ($obj->GENUS == $genus);
+    //   });
+    // } elseif ($species) {
+    //   $filtered_data = array_filter($data, function ($obj) use ($species) {
+    //     return ($obj->SPECIES == $species);
+    //   });
+    // } elseif ($subtaxa) {
+    //   $filtered_data = array_filter($data, function ($obj) use ($subtaxa) {
+    //     return ($obj->SUBTAXA == $subtaxa);
+    //   });
+    // } else {
+    //   $filtered_data = $data;
+    // }
     
     $display .= $this->display_form($data, $table, $stock_type, $genes, $chromosome_of_interest, $genus, $species, $subtaxa);
 
-    $display .= $this->display_data($filtered_data, $table);
+    $display .= $this->display_data($data, $table);
 
     return $display;
   }
