@@ -1,5 +1,5 @@
 # wgrc-wp
-This plugin embeds a database view of the Wheat Genetics Resource Center (WGRC) database at Kansas State University into a WordPress page using shortcode.
+This plugin embeds a table view of the Wheat Genetics Resource Center (WGRC) database at Kansas State University into a WordPress page using shortcode.
 
 It is currently being used on the database page of the WGRC website here: https://wgrc.k-state.edu/database/
 
